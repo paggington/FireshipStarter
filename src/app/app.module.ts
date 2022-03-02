@@ -11,9 +11,14 @@ import {environment} from "../environments/environment";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
+import { BoardListComponent } from './components/board-list/board-list.component';
+import { BoardComponent } from './components/board/board.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 @NgModule({
   declarations: [
     AppComponent,
+    BoardListComponent,
+    BoardComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +28,8 @@ import {AngularFireModule} from "@angular/fire/compat";
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    DragDropModule
   ],
   providers: [],
   exports: [
