@@ -14,23 +14,26 @@ import {AngularFireModule} from "@angular/fire/compat";
 import { BoardListComponent } from './components/board-list/board-list.component';
 import { BoardComponent } from './components/board/board.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import { BoardDialogComponent } from './components/kanban/dialog/board-dialog.component';
+import { TaskDialogComponent } from './components/kanban/dialog/task-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 @NgModule({
   declarations: [
     AppComponent,
-    BoardListComponent,
-    BoardComponent,
+    HomepageComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    SharedModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    DragDropModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        SharedModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireAuthModule,
+        DragDropModule,
+        MatDialogModule
+    ],
   providers: [],
   exports: [
   ],

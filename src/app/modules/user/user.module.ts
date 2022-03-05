@@ -12,8 +12,11 @@ import {HomepageComponent} from "../../components/homepage/homepage.component";
 
 
 @NgModule({
-  declarations: [GoogleSignInDirective,LoginPageComponent,EmailLoginComponent,
-    HomepageComponent],
+  declarations: [
+    GoogleSignInDirective,
+    LoginPageComponent,
+    EmailLoginComponent,
+  ],
   exports:[GoogleSignInDirective],
   imports: [
     CommonModule,
