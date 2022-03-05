@@ -19,7 +19,7 @@ export class BoardService {
 
     return this.db.collection('boards').add({
       ...data,
-      id: user?.uid,
+      id: user?.getIdToken(),
       tasks: [{description: 'Hello', label: 'green'}]
     })
   }

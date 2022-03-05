@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BoardModel} from "../../modules/kanban/board.model";
+import {BoardModel, Task} from "../../modules/kanban/board.model";
 import {BoardService} from "../../services/kanban/board.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {MatDialog} from "@angular/material/dialog";
+import {TaskDialogComponent} from "../kanban/dialog/task-dialog.component";
 
 @Component({
   selector: 'app-board',
@@ -11,7 +13,7 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 export class BoardComponent implements OnInit {
   @Input()
   board?:BoardModel;
-  constructor(private boardService:BoardService) {
+  constructor(private boardService:BoardService,private dialog:MatDialog) {
 
   }
 
@@ -21,5 +23,27 @@ export class BoardComponent implements OnInit {
     // @ts-ignore
     moveItemInArray(this.board?.tasks,event.previousIndex,event.currentIndex);
     this.boardService.updateTasks(this.board?.id, this.board?.tasks);
+  }
+  openDialog(task?:Task,idx?:number):void{
+    const newTask={label:'purple'};
+    const dialogRef=this.dialog.open(TaskDialogComponent,{
+      width:'500px',
+      data:task?{task:{...task},isNew:false,boardId:this.board?.id,idx}:{task: newTask,isNew: true}
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.isNew) {
+
+          this.boardService.updateTasks(this.board?.id, [// @ts-ignore
+            ...this.board?.tasks,
+            result.task
+          ]);
+        } else {
+          const update = this.board?.tasks;
+          update?.splice(result.idx, 1, result.task);
+          this.boardService.updateTasks(this.board?.id, this.board?.tasks);
+        }
+      }
+    });
   }
 }
